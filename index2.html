@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--ส่วนที่ไม่แสดงออกที่หน้าเว็บ-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*สิ่งที่อยู่ตรงนี้ จะมีไว้ให้แค้ dev อ่าน*/
+        /*1.แต่งใคร (id, class , Dom) 2.แต่งอะไร  */
+        @font-face{
+            font-family: 'kanit';
+            src: url('./Kanit/Kanit-Regular.ttf');
+        }
+        
+        body {
+            font-family: 'kanit';
+            font-size: 14px;
+        }
+                
+        .container {
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+        }
+        .header {
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: lightpink;
+        }
+        .header-form {
+            width: 100px;
+            background-color: azure;
+        }
+        .flex {
+            display: flex;
+        }
+        .form-input {
+            margin-bottom: 5px;
+        }
+        input.form, textarea {
+            border: 1px solid #ccc ;
+            width: 100%;
+        }
+        .center {
+            text-align: center;
+        }
+        .button {
+            border: 0;
+            width: 30%;
+            height: 50px;
+            background-color: rgb(204, 248, 191);
+        }
+        .button:hover {
+            background-color: rgb(173, 214, 161);
+        }
+                
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+        Register form 
+        </div>
+        <div>
+            <div class="flex form-input"> 
+            <div class ="header-form">ชื่อ</div>
+            <input class ="from"type="text">
+        </div>
+        <div class="flex form-input"> 
+            <div class ="header-form">นามสกุล</div>
+            <input class ="from"type="text">
+        </div>
+        <div class="flex form-input">         
+            <div class="header-form">อายุ</div>
+            <input class ="from"type="number"min="0" max="150">
+        </div>
+
+        <div class="flex gender form-input">
+            <div class ="header-form">เพศ</div>
+            <div>
+                <input name ="gender" type="radio">ชาย
+                <input name="gender"type="radio">หญิง
+                <input name="gender"type="radio">อื่น ๆ
+            </div>
+        </div>
+
+        <div class="form-input">
+            <div class ="header-form">งานอดิเรก</div>
+            <div>
+                <input name ="interest" type="checkbox">อ่านหนังสือ
+            </div>
+            <div>
+                <input name ="interest" type="checkbox">เล่นเกม
+            </div>
+            <div>
+                <input name ="interest" type="checkbox">ฟังเพลง
+            </div>
+            <div>
+                <input name ="interest" type="checkbox">ดูหนัง
+            </div>
+        </div>
+
+        <div class ="header-form">คำอธิบายตัวเอง</div>
+            <textarea></textarea>
+        </div>
+        <div class="center">
+            <button class="button">ส่งข้อมูล</button>
+        </div>
+    </div>    
+
+    
+</body>
+</html>
