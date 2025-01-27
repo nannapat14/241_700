@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         /*สิ่งที่อยู่ตรงนี้ จะมีไว้ให้แค้ dev อ่าน*/
         /*1.แต่งใคร (id, class , Dom) 2.แต่งอะไร  */
         @font-face{
-            font-family: 'kanit';
+            font-family: 'Kanit';
             src: url('./Kanit/Kanit-Regular.ttf');
         }
         
         body {
-            font-family: 'kanit';
+            font-family: 'Kanit';
             font-size: 14px;
         }
                 
@@ -68,15 +69,15 @@
         <div>
             <div class="flex form-input"> 
             <div class ="header-form">ชื่อ</div>
-            <input class ="from"type="text">
+            <input class ="form" name="firstname" type="text">
         </div>
         <div class="flex form-input"> 
             <div class ="header-form">นามสกุล</div>
-            <input class ="from"type="text">
+            <input class ="form" name="lastname" type="text">
         </div>
         <div class="flex form-input">         
             <div class="header-form">อายุ</div>
-            <input class ="from"type="number"min="0" max="150">
+            <input class ="form" name="age" type="number" min="0" max="150">
         </div>
 
         <div class="flex gender form-input">
@@ -105,13 +106,12 @@
         </div>
 
         <div class ="header-form">คำอธิบายตัวเอง</div>
-            <textarea></textarea>
+            <textarea name="description"></textarea>
         </div>
         <div class="center">
             <button class="button">ส่งข้อมูล</button>
         </div>
-    </div>    
-
-    
+        <script src="index.js"></script>
+    </div>     
 </body>
 </html>
