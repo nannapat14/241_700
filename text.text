@@ -1,0 +1,15 @@
+docker run -p 80:80 nginx // รันคอนเทนเนอร์ nginx และแมปพอร์ต 80 ของโฮสต์ไปยังพอร์ต 80 ของคอนเทนเนอร์
+docker ps --all //เปิดดู list all containers
+docker rm <containers_id> //ลบ containers
+docker run -d -p 8070:80 nginx //
+docker exec -it f30abfd98784 bash
+ls //list file
+pwd //print working directory
+cd //change directory
+cat //print file content
+cd .. //go backcd
+exit //ออกจาก containers
+
+
+docker system prune //remove all stopped containers
+docker-compose up -d 
