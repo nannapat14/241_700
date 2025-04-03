@@ -1,0 +1,53 @@
+/* public/styletime.css */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #dfe9f3, #ffffff);
+    margin: 0;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .main-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    background: linear-gradient(to right, #1b65dd, #9cadfc);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .attendance-log {
+    margin-top: 2rem;
+    text-align: left;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background-color: #ffffff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .back-button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+  }
+  

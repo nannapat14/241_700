@@ -1,0 +1,30 @@
+<!-- public/time_attendance.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Attendance</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styletime.css" />
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back</a>
+  <div class="container">
+    <h1>Time Attendance</h1>
+
+    <div class="attendance-actions">
+      <button id="clockInBtn" class="main-btn">Check In</button>
+      <button id="clockOutBtn" class="main-btn">Check Out</button>
+    </div>
+
+    <div class="attendance-log">
+      <h3>Last Log</h3>
+      <p><strong>Check In:</strong> <span id="lastClockIn">-</span></p>
+      <p><strong>Check Out:</strong> <span id="lastClockOut">-</span></p>
+    </div>
+  </div>
+
+  <script src="time_attendance.js"></script>
+</body>
+</html>

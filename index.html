@@ -1,69 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Leave & Attendance System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styleindex.css" />
 </head>
-
 <body>
-    <!-- form -->
-    <div class="container">
-        <div class="header">
-            Register Form
-        </div>
-        <div class="flex form-input">
-            <div class="header-form">ชื่อ</div>
-            <input class="form" name="firstname" type="text">
-        </div>
-        <div class="flex form-input">
-            <div class="header-form">นามสกุล</div>
-            <input class="form" name="lastname" type="text">
-        </div>
-        <div class="flex form-input">
-            <div class="header-form">อายุ</div>
-            <input class="form" name="age" type="number" min="0" max="100">
-        </div>
-        <div class="flex gender form-input">
-            <div class="header-form">เพศ</div>
-            <div class="flex">
-                <div>
-                    <input name="gender" type="radio" value="ชาย" > ชาย
-                </div>
-                <div>
-                    <input name="gender" type="radio" value="หญิง" > หญิง
-                </div>
-                <div>
-                    <input name="gender" type="radio" value="อื่นๆ" > อื่นๆ
-                </div>
-            </div>
-        </div>
-        <div class="form-input">
-            <div class="header-form">งานอดิเรก</div>
-            <div>
-                <input name="interest" type="checkbox" value="อ่านหนังสือ"> อ่านหนังสือ
-            </div>
-            <div>
-                <input name="interest" type="checkbox" value="ดูหนัง"> ดูหนัง
-            </div>
-            <div>
-                <input name="interest" type="checkbox" value="ฟังเพลง"> ฟังเพลง
-            </div>
-        </div>
-        <div class="form-input">
-            คำอธิบาย
-            <textarea name="description"></textarea>
-        </div>
+  <nav class="top-bar">
+    <div class="logo">📋 Management System</div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </nav>
 
-        <div id= message class="message"></div>
-        
-        <div class="center">
-            <button onclick="submitData()" class="button">ส่งข้อมูล</button>
-        </div>
+  <div class="dashboard">
+    <h1>Welcome</h1>
+    <p>Please choose an action below:</p>
+
+    <div class="action-cards">
+      <a href="time_attendance.html" class="card blue">
+        <h3>🕒 Time Attendance</h3>
+        <p>Check in / Check out</p>
+      </a>
+      <a href="request_leave.html" class="card green">
+        <h3>📝 Request for Leave</h3>
+        <p>Submit a new leave request</p>
+      </a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-    <script src="index.js"></script>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem('token');
+      window.location.href = "login.html";
+    }
+
+    // ถ้าไม่มี token → redirect กลับไป login
+    if (!localStorage.getItem('token')) {
+      window.location.href = "login.html";
+    }
+  </script>
 </body>
 </html>

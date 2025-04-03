@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attendance History | Leave & Attendance System</title>
+  <link rel="stylesheet" href="styleatt.css" />
+</head>
+<body>
+  <h2>Attendance History</h2>
+  <button onclick="window.location.href='index.html'">Back</button>
+
+  <div id="attendanceHistoryContainer"></div>
+
+  <h3>Clock In</h3>
+  <form id="attendanceForm">
+    <input type="email" id="attendanceEmail" placeholder="Email" required />
+    <button type="submit">Clock In</button>
+  </form>
+
+  <script>
+    // ฟังก์ชันในการแสดงข้อมูลการเข้าทำงาน
+    function displayAttendanceHistory() {
+      const attendanceHistory = JSON.parse(localStorage.getItem('attendanceHistory')) || [];
+      const container = document.getElementById('attendanceHistoryContainer');
+      container.innerHTML = '';
+
+      attendanceHistory.forEach((attendance, index) => {
+        const attendanceItem = document.createElement('div');
+        attendanceItem.innerHTML = `
+          <p><strong>Email:</strong> ${attendance.email}</p>
+          <p><strong>Clock In Time:</strong> ${attendance.clockIn}</p>
+          <button onclick="deleteAttendance(${index})">Delete</button>
+        `;
+        container.appendChild(attendanceItem);
+      });
+    }
+
+    // ฟังก์ชันในการเพิ่มข้อมูลการเข้างาน
+    document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const attendanceEmail = document.getElementById('attendanceEmail').value;
+      const clockInTime = new Date().toISOString();
+
+      const attendanceHistory = JSON.parse(localStorage.getItem('attendanceHistory')) || [];
+      attendanceHistory.push({
+        email: attendanceEmail,
+        clockIn: clockInTime
+      });
+
+      localStorage.setItem('attendanceHistory', JSON.stringify(attendanceHistory));
+      displayAttendanceHistory();
+      document.getElementById('attendanceForm').reset();
+    });
+
+    // ฟังก์ชันในการลบข้อมูลการเข้าทำงาน
+    function deleteAttendance(index) {
+      const attendanceHistory = JSON.parse(localStorage.getItem('attendanceHistory')) || [];
+      attendanceHistory.splice(index, 1);
+      localStorage.setItem('attendanceHistory', JSON.stringify(attendanceHistory));
+      displayAttendanceHistory();
+    }
+
+    // เรียกใช้งานการแสดงข้อมูลเมื่อเริ่ม
+    displayAttendanceHistory();
+  </script>
+</body>
+</html>

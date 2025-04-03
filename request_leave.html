@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Leave | Leave & Attendance System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylereq.css" />
+  <style>
+    .back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #f0f0f0;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .error-text {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">← Back</a>
+
+  <div class="leave-form-container">
+    <form id="leaveForm" class="form-box">
+      <h2>Request Leave</h2>
+
+      <label for="leaveType">Leave Type</label>
+      <select id="leaveType" required>
+        <option value="">-- Select Leave Type --</option>
+        <option value="sick">Sick Leave</option>
+        <option value="vacation">Vacation Leave</option>
+        <option value="personal">Personal Leave</option>
+        <option value="annual">Annual Leave</option>
+        <option value="maternity">Maternity Leave</option>
+        <option value="ordination">Ordination Leave</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="startDate">Start Date</label>
+      <input type="date" id="startDate" required />
+
+      <label for="endDate">End Date</label>
+      <input type="date" id="endDate" required />
+
+      <label for="reason">Reason</label>
+      <textarea id="reason" rows="4" placeholder="Optional..."></textarea>
+
+      <button type="submit" class="main-btn">Submit Request</button>
+      <p id="leaveError" class="error-text"></p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('leaveForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const leaveType = document.getElementById('leaveType').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      const reason = document.getElementById('reason').value;
+      const errorText = document.getElementById('leaveError');
+
+      errorText.textContent = "";
+
+      if (new Date(endDate) < new Date(startDate)) {
+        errorText.textContent = "End date cannot be before start date.";
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("Please login first.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:5000/api/leave-request', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ leaveType, startDate, endDate, reason })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alert("Leave request submitted!");
+          window.location.href = "index.html";
+        } else {
+          errorText.textContent = data.message || "Submission failed.";
+        }
+      } catch (err) {
+        console.error(err);
+        errorText.textContent = "Something went wrong. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>

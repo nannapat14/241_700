@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leave History | Leave & Attendance System</title>
+  <link rel="stylesheet" href="stylel.css" />
+</head>
+<body>
+  <h2>Leave History</h2>
+  <button onclick="window.location.href='index.html'">Back</button>
+
+  <div id="leaveHistoryContainer"></div>
+
+  <h3>Request Leave</h3>
+  <form id="leaveForm">
+    <input type="email" id="leaveEmail" placeholder="Email" required />
+    <input type="text" id="leaveType" placeholder="Leave Type" required />
+    <input type="date" id="leaveDate" required />
+    <textarea id="leaveReason" placeholder="Reason (Optional)"></textarea>
+    <button type="submit">Submit Leave</button>
+  </form>
+
+  <script>
+    // ฟังก์ชันในการแสดงข้อมูลการลา
+    function displayLeaveHistory() {
+      const leaveHistory = JSON.parse(localStorage.getItem('leaveHistory')) || [];
+      const container = document.getElementById('leaveHistoryContainer');
+      container.innerHTML = '';
+
+      leaveHistory.forEach((leave, index) => {
+        const leaveItem = document.createElement('div');
+        leaveItem.innerHTML = `
+          <p><strong>Email:</strong> ${leave.email}</p>
+          <p><strong>Leave Type:</strong> ${leave.leaveType}</p>
+          <p><strong>Leave Date:</strong> ${leave.leaveDate}</p>
+          <p><strong>Reason:</strong> ${leave.leaveReason}</p>
+          <button onclick="editLeave(${index})">Edit</button>
+          <button onclick="deleteLeave(${index})">Delete</button>
+        `;
+        container.appendChild(leaveItem);
+      });
+    }
+
+    // ฟังก์ชันในการเพิ่มข้อมูลการลา
+    document.getElementById('leaveForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const leaveEmail = document.getElementById('leaveEmail').value;
+      const leaveType = document.getElementById('leaveType').value;
+      const leaveDate = document.getElementById('leaveDate').value;
+      const leaveReason = document.getElementById('leaveReason').value;
+
+      const leaveHistory = JSON.parse(localStorage.getItem('leaveHistory')) || [];
+      leaveHistory.push({
+        email: leaveEmail,
+        leaveType: leaveType,
+        leaveDate: leaveDate,
+        leaveReason: leaveReason
+      });
+
+      localStorage.setItem('leaveHistory', JSON.stringify(leaveHistory));
+      displayLeaveHistory();
+      document.getElementById('leaveForm').reset();
+    });
+
+    // ฟังก์ชันในการแก้ไขข้อมูลการลา
+    function editLeave(index) {
+      const leaveHistory = JSON.parse(localStorage.getItem('leaveHistory'));
+      const leave = leaveHistory[index];
+
+      document.getElementById('leaveEmail').value = leave.email;
+      document.getElementById('leaveType').value = leave.leaveType;
+      document.getElementById('leaveDate').value = leave.leaveDate;
+      document.getElementById('leaveReason').value = leave.leaveReason;
+
+      deleteLeave(index);
+    }
+
+    // ฟังก์ชันในการลบข้อมูลการลา
+    function deleteLeave(index) {
+      const leaveHistory = JSON.parse(localStorage.getItem('leaveHistory')) || [];
+      leaveHistory.splice(index, 1);
+      localStorage.setItem('leaveHistory', JSON.stringify(leaveHistory));
+      displayLeaveHistory();
+    }
+
+    // เรียกใช้งานการแสดงข้อมูลเมื่อเริ่ม
+    displayLeaveHistory();
+  </script>
+</body>
+</html>
